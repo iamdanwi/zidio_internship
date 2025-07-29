@@ -2,10 +2,9 @@
 "use client"
 import React, { useState } from "react";
 import { Eye, EyeOff, Mail, Lock, ArrowRight, ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { toast } from "sonner";
-import {useRouter} from "next/router";
+import {useRouter} from "next/navigation";
 
 const AdminLogin = () => {
   const router = useRouter();
@@ -42,7 +41,7 @@ const AdminLogin = () => {
       });
 
       setTimeout(()=>{
-        router.push("admin/dashboard");
+        router.push("/admin/dashboard");
       }, 2000);
     } catch (err: any) {
       const errorMessage =
@@ -64,21 +63,20 @@ const AdminLogin = () => {
   };
 
   const handleRegister = () => {
-    window.location.href = "/register";
+    router.push("/admin-auth/register")
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted flex items-center justify-center p-4">
       <div className="w-full max-w-md">
     
-        <Button
-        variant="outline"
+        <button
           onClick={handleBack}
           className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-6 group"
         >
           <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
           Back
-        </Button>
+        </button>
 
         {/* Header */}
         <div className="text-center mb-8">

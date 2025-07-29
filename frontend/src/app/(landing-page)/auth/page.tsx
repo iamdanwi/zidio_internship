@@ -1,22 +1,24 @@
 "use client"
 import React from "react";
 import { User, Shield, ArrowRight } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const AuthPage = () => {
+  const router = useRouter();
   const handleUserLogin = () => {
-    // In Next.js, you would use router.push('/auth/user/login')
-    window.location.href = "/user/login";
+    router.push("/user-auth/login");
+    // window.location.href = "/user-auth/login";
   };
 
   const handleAdminLogin = () => {
-    // In Next.js, you would use router.push('/auth/admin/login')
-    window.location.href = "/admin/login";
+    router.push("/admin-auth/login");
+    // window.location.href = "/admin-auth/login";
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted flex items-center justify-center p-4">
+    <div className="min-h-screen flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Header */}
+
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-2xl mb-4">
             <Shield className="w-8 h-8 text-primary-foreground" />
@@ -29,9 +31,7 @@ const AuthPage = () => {
           </p>
         </div>
 
-        {/* Login Options */}
         <div className="space-y-4">
-          {/* User Login Card */}
           <div
             onClick={handleUserLogin}
             className="group relative bg-card rounded-2xl p-6 border border-border hover:border-primary/50 transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-primary/10"
@@ -54,7 +54,6 @@ const AuthPage = () => {
             </div>
           </div>
 
-          {/* Admin Login Card */}
           <div
             onClick={handleAdminLogin}
             className="group relative bg-card rounded-2xl p-6 border border-border hover:border-accent-foreground/50 transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-accent/10"

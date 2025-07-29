@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import React, { useState } from "react";
 import { Eye, EyeOff, Mail, Lock, ArrowRight, ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { toast } from "sonner";
 
 const UserLogin = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -22,11 +27,34 @@ const UserLogin = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
+    try {
+      const { email, password } = formData;
+      await axios.post("/api/auth/user/login", {
+        email,
+        password,
+      });
+
+      toast.success("Logged in successfully", {
+        position: "top-right",
+        duration: 2000,
+        style: { backgroundColor: "green", color: "white" },
+      });
+
+      setTimeout(() => {
+        router.push("/user/dashboard");
+      }, 2000);
+    } catch (err: any) {
+      const errorMessage =
+        err.response?.data?.message || err.message || "Login failed";
+      toast.error(errorMessage, {
+        position: "top-right",
+        duration: 2000,
+        style: { backgroundColor: "red", color: "white" },
+      });
+      console.error("Login error:", err.response?.data || err.message);
+    } finally {
       setIsLoading(false);
-      console.log("Login attempt:", formData);
-    }, 2000);
+    }
   };
 
   const handleBack = () => {

@@ -24,9 +24,7 @@ export default function Navbar() {
   return (
     <header className="px-4 md:px-6">
       <div className="flex h-16 items-center justify-between gap-4">
-
         <div className="flex items-center gap-2">
-
           <Popover>
             <PopoverTrigger asChild>
               <Button
@@ -81,8 +79,11 @@ export default function Navbar() {
           </Popover>
 
           <div className="flex items-center gap-6">
-            <Link href="/" className="text-primary hover:text-primary/90">
-              <img src="/logo.svg" alt="logo"/>
+            <Link
+              href="/"
+              className="text-primary hover:text-primary/90"
+            >
+              <img src="/logo.svg" alt="logo" className="rotate-infinite" />
             </Link>
 
             <NavigationMenu className="max-md:hidden">
@@ -108,10 +109,10 @@ export default function Navbar() {
             <Link href="/auth">Sign In</Link>
           </Button>
           <Button asChild size="sm" className="text-sm">
-            <a href="/register">Get Started</a>
+            <Link href="/admin-auth/register">Get Started</Link>
           </Button>
         </div>
       </div>
     </header>
-  )
+  );
 }

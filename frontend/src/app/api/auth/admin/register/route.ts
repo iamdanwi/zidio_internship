@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import axios, { AxiosError } from "axios";
 
-export default async function POST(req: NextRequest){
-    const registerUrl = `${process.env.BACKEND_URL}/api/admin/login`;
+export async function POST(req: NextRequest){
+    const registerUrl = `${process.env.BACKEND_URL}/api/admin/register`;
     
     try {
         const body = await req.json();

@@ -1,4 +1,5 @@
 import Navbar from "@/components/Navbar";
+import "./style.css"
 
 export default function RootLayout({
   children,
@@ -6,11 +7,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <main className="container mx-auto">
-        <Navbar/>
-        {children}
+      <main className="bg-gradient-to-br from-background to-muted">
+        <div className="container mx-auto">
+          <Navbar />
+          {children}
+        </div>
       </main>
-    </html>
   );
 }

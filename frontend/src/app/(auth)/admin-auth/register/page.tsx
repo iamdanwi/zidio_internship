@@ -12,7 +12,7 @@ import {
   Check,
 } from "lucide-react";
 import axios from "axios";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 
@@ -50,17 +50,21 @@ const RegisterPage = () => {
       toast.success("Admin created successful", {position: "top-right", duration: 2000, style:{backgroundColor: "green", color: "white"}});
 
       setTimeout(() => {
-        setIsLoading(false);
-        router.push("admin/login");
+
+        router.push("/admin-auth/login");
       }, 2000);
-    } catch (error: any) {
-      const err = error.response?.data || error.message || "registration failed";
-      toast.error(err, {
-        position: "top-right",
-        duration: 2000,
-        style: { backgroundColor: "green", color: "white" },
-      });
-    }
+    } catch (err: any) {
+          const errorMessage =
+            err.response?.data?.message || err.message || "Login failed";
+          toast.error(errorMessage, {
+            position: "top-right",
+            duration: 2000,
+            style: { backgroundColor: "red", color: "white" },
+          });
+          console.error("Login error:", err.response?.data || err.message);
+        } finally {
+          setIsLoading(false);
+        }
    
   };
 
@@ -69,13 +73,12 @@ const RegisterPage = () => {
   };
 
   const handleLogin = () => {
-    window.location.href = "/admin/login";
+    router.push("/admin-auth/login");
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted flex items-center justify-center p-4">
       <div className="w-full max-w-md">
-        {/* Back Button */}
         <button
           onClick={handleBack}
           className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-6 group"
@@ -84,7 +87,6 @@ const RegisterPage = () => {
           Back
         </button>
 
-        {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-foreground mb-2">
             Create Account
@@ -92,10 +94,10 @@ const RegisterPage = () => {
           <p className="text-muted-foreground">Join us today and get started</p>
         </div>
 
-        {/* Form */}
+
         <div className="bg-card rounded-2xl p-6 border border-border shadow-lg">
           <div className="space-y-5">
-            {/* Name */}
+
             <div>
               <label
                 htmlFor="name"
@@ -118,7 +120,7 @@ const RegisterPage = () => {
               </div>
             </div>
 
-            {/* Email */}
+
             <div>
               <label
                 htmlFor="email"
@@ -141,7 +143,6 @@ const RegisterPage = () => {
               </div>
             </div>
 
-            {/* Password */}
             <div>
               <label
                 htmlFor="password"
@@ -175,7 +176,6 @@ const RegisterPage = () => {
               </div>
             </div>
 
-            {/* Terms Checkbox */}
             <div className="flex items-start space-x-3">
               <button
                 type="button"
@@ -202,7 +202,6 @@ const RegisterPage = () => {
               </p>
             </div>
 
-            {/* Submit Button */}
             <button
               type="button"
               onClick={handleSubmit}
@@ -220,14 +219,12 @@ const RegisterPage = () => {
             </button>
           </div>
 
-          {/* Divider */}
           <div className="mt-6 flex items-center">
             <div className="flex-1 border-t border-border"></div>
             <span className="px-4 text-sm text-muted-foreground">or</span>
             <div className="flex-1 border-t border-border"></div>
           </div>
 
-          {/* Login Link */}
           <div className="mt-6 text-center">
             <p className="text-muted-foreground text-sm">
               Already have an account?{" "}
