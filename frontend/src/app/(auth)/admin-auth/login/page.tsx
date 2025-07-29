@@ -5,8 +5,10 @@ import { Eye, EyeOff, Mail, Lock, ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { toast } from "sonner";
+import {useRouter} from "next/router";
 
 const AdminLogin = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
@@ -28,7 +30,7 @@ const AdminLogin = () => {
 
     try {
       const { email, password } = formData;
-      const res = await axios.post("/api/auth/admin/login", {
+      await axios.post("/api/auth/admin/login", {
         email,
         password,
       });
@@ -38,6 +40,10 @@ const AdminLogin = () => {
         duration: 2000,
         style: { backgroundColor: "green", color: "white" },
       });
+
+      setTimeout(()=>{
+        router.push("admin/dashboard");
+      }, 2000);
     } catch (err: any) {
       const errorMessage =
         err.response?.data?.message || err.message || "Login failed";

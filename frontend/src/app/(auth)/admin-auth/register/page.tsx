@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useState } from "react";
 import {
@@ -10,8 +11,13 @@ import {
   ArrowLeft,
   Check,
 } from "lucide-react";
+import axios from "axios";
+import { useRouter } from "next/router";
+import { toast } from "sonner";
+
 
 const RegisterPage = () => {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -34,14 +40,28 @@ const RegisterPage = () => {
       alert("Please agree to the terms and conditions");
       return;
     }
-
     setIsLoading(true);
 
-    // Simulate API call
-    setTimeout(() => {
-      setIsLoading(false);
-      console.log("Registration attempt:", formData);
-    }, 2000);
+
+    try {
+      const { name, email, password } = formData;
+
+      await axios.post("/api/auth/admin/register", { name, email, password });
+      toast.success("Admin created successful", {position: "top-right", duration: 2000, style:{backgroundColor: "green", color: "white"}});
+
+      setTimeout(() => {
+        setIsLoading(false);
+        router.push("admin/login");
+      }, 2000);
+    } catch (error: any) {
+      const err = error.response?.data || error.message || "registration failed";
+      toast.error(err, {
+        position: "top-right",
+        duration: 2000,
+        style: { backgroundColor: "green", color: "white" },
+      });
+    }
+   
   };
 
   const handleBack = () => {

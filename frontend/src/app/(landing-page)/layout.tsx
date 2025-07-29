@@ -7,10 +7,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="container mx-auto">
+      <main className="container mx-auto">
         <Navbar/>
         {children}
-      </body>
+      </main>
     </html>
   );
 }

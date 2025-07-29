@@ -19,7 +19,7 @@ export default function Home() {
               and keep track of all your analysis history in one place.
             </p>
 
-            <Link href="/register">
+            <Link href="/admin-auth/register">
               <Button className="cursor-pointer py-5 px-8">Get Started</Button>
             </Link>
           </div>
