@@ -5,12 +5,12 @@ import { User, Shield, ArrowRight } from "lucide-react";
 const AuthPage = () => {
   const handleUserLogin = () => {
     // In Next.js, you would use router.push('/auth/user/login')
-    window.location.href = "/auth/user/login";
+    window.location.href = "/user/login";
   };
 
   const handleAdminLogin = () => {
     // In Next.js, you would use router.push('/auth/admin/login')
-    window.location.href = "/auth/admin/login";
+    window.location.href = "/admin/login";
   };
 
   return (
@@ -76,16 +76,6 @@ const AuthPage = () => {
               <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-accent-foreground group-hover:translate-x-1 transition-all" />
             </div>
           </div>
-        </div>
-
-        {/* Footer */}
-        <div className="mt-8 text-center">
-          <p className="text-muted-foreground text-sm">
-            Need help?{" "}
-            <span className="text-primary hover:text-primary/80 cursor-pointer font-medium">
-              Contact Support
-            </span>
-          </p>
         </div>
       </div>
     </div>

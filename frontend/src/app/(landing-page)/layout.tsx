@@ -1,4 +1,4 @@
-import { Toaster } from "@/components/ui/sonner";
+import Navbar from "@/components/Navbar";
 
 export default function RootLayout({
   children,
@@ -7,9 +7,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className="container mx-auto">
+        <Navbar/>
         {children}
-        <Toaster />
       </body>
     </html>
   );
